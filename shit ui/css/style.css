@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background:rgb(63, 63, 63)
+}
+
+#window {
+    background-color: red;
+    z-index: 999;
+    width: 800px;
+    height: 500px;
+}
