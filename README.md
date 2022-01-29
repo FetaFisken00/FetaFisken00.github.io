@@ -1,5 +1,5 @@
 "# FetaFisken00.github.io" 
 
-[Buttonmash](./buttonmash/dist/index.html)
+[Buttonmash](https://fetafisken00.github.io//buttonmash/dist/index.html)
 
-[Heatmap](./map-shit/dist/index.html)
+[Heatmap](https://fetafisken00.github.io//map-shit/dist/index.html)
