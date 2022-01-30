@@ -5,7 +5,7 @@
     </head>
     <body>
         <div style="display: flex; justify-content: space-around">
-            <div id="window" style="left: 900; top: 300;">
+            <div id="window" style="left: 100; top: 100;">
                 <div id="windowHeader">
                     <div id="headerText">
                         <headerText>Installation wizard</headerText>
@@ -16,13 +16,13 @@
                         <div id="exit" class="material-icons" style="font-size: 16px;">close</div>
                     </div>
                 </div>
-                <div id="windowContent">
-                    <div id="contentInfo">
+                <div id="windowContentTerms">
+                    <div class="contentInfo">
                         <h3>License Agreement</h3>
                         <p1>Please read the following license agreement carefully</p1>
                     </div>
                     <div id="contentInteractiveBox">
-                        <div id="scrollBox" style="user-select: all;">
+                        <div id="scrollBoxText" style="user-select: all;">
                             <h1>Terms and Conditions</h1>
                             <h2>Consent</h2>
                             <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
@@ -139,15 +139,29 @@
                         </div>
                         <div id="setupBox">
                             <div>
-                                <p class="box-title">Setup</p>
+                                <p class="box-title" style="font-size:medium; color: rgb(46, 46, 46);">Setup</p>
                             </div>
                             <div style="display: flex; justify-content: left; align-items: center;"> 
-                                <button id="back" type="button" style="margin: 5px; width: 5rem;">&lt;  Back</button>
-                                <button id="next" type="button" style="margin: 5px; width: 5rem;" onclick="alert(`Good job you waited five minutes, you win nothing congratulations :)`)" disabled>Wait</button>
+                                <button id="back" type="button" style="margin: 5px; width: 5rem; align-items: center;" onclick="alert(`lmao as if i would make the back button do something useful`)">&lt;  Back</button>
+                                <button id="next" type="button" style="margin: 5px; width: 5rem; align-items: center;" disabled>Wait</button>
                             </div>
                             <div style="display: flex; justify-content: right; align-items: center;">
-                                <button id="cancel" type="button" style="margin: 5px; width: 5rem;">Cancel</button>
+                                <button id="cancel" type="button" style="margin: 5px; width: 5rem; align-items: center;" onclick="alert(`lmao as if i would make the cancel button do something useful`)">Cancel</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="windowContentQuestions" class="hidden" style="opacity: 0;">
+                    <div class="contentInfo">
+                        <h3>Verification</h3>
+                        <p1>Please select all that apply</p1>
+                    </div>
+                    <div id="contentInteractiveBoxQuiz">
+                        <div id="scrollBoxQuiz">
+                            
+                        </div>
+                        <div id="buttonParent">
+                            <button type="button" style="margin: 5px; width: 5rem; align-items: center;">Verify</button>
                         </div>
                     </div>
                 </div>

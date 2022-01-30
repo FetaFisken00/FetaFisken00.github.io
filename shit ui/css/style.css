@@ -14,7 +14,7 @@ headerText {
 h3 {
     font-family: Calibri;
     font-size: 1em;
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
     margin: 0;
 }
 
@@ -22,7 +22,7 @@ p1 {
     font-family: Calibri;
     font-size: 1em;
     padding: 1rem;
-    margin: 0 0 1em 1em;
+    margin: 0.5em 0 0.5em 1em;
     display: block; 
 }
 
@@ -64,7 +64,7 @@ li {
     height: 595px;
     position: absolute;
     display: grid;
-    grid-template-rows: 5%;
+    grid-template-rows: 6%;
     border-style: solid;
     border-width: 0.5px;
     border-radius: 2px;
@@ -74,7 +74,7 @@ li {
 #window #windowHeader {
     background-color: #495359;
     display: grid;
-    grid-template-columns: auto 12em;
+    grid-template-columns: auto 10em;
 }
 
 #window #windowHeader #headerText {
@@ -87,7 +87,7 @@ li {
 
 #window #windowHeader #headerButtons {
     display: flex;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 #window #windowHeader #headerButtons #minimize {
@@ -101,13 +101,12 @@ li {
 }
 
 #window #windowHeader #headerButtons #maximize {
-    color: #D2D9DF;
+    color: #7f8183;
     text-align: center;
     width: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
 }
 
 #window #windowHeader #headerButtons #exit {
@@ -120,9 +119,6 @@ li {
     cursor: pointer;
 }
 
-#window #windowHeader #headerButtons #maximize:hover {
-    background-color: #5D6A72;
-}
 #window #windowHeader #headerButtons #minimize:hover {
     background-color: #5D6A72;
 }
@@ -131,30 +127,52 @@ li {
     background-color: #C42B1C;
 }
 
-#window #windowContent {
+#window #windowContentTerms {
     background-color: #D2D9DF;
     display: grid;
     grid-template-rows: auto 1fr;
 }
 
-#window #windowContent #contentInfo {
+.contentInfo {
     background-color: #FFFFFF;
     height: max-content;
 }
 
-#window #windowContent #contentInteractiveBox {
-    background-color: #F0EEF0;
-}
-
 #contentInteractiveBox {
+    background-color: #F0EEF0;
     display: grid;
     grid-template-rows: min-content min-content auto ;
 }
 
-#scrollBox {
+#contentInteractiveBoxQuiz {
+    background-color: #F0EEF0;
+    display: grid;
+    grid-template-rows: min-content auto;
+}
+
+#scrollBoxText {
     background-color: #FFFFFF;
     overflow-y: scroll;
-    height: 296px;
+    height: 340px;
+    border-style: inset;
+    border-width: 2.5px;
+    margin: 1rem 1rem 0.2rem 1rem;
+}
+
+#buttonParent {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: max-content;
+    margin: auto 1rem auto auto;
+
+
+}
+      
+#scrollBoxQuiz {
+    background-color: #FFFFFF;
+    overflow-y: scroll;
+    height: 380px;
     border-style: inset;
     border-width: 2.5px;
     margin: 1rem 1rem 0.2rem 1rem;
@@ -163,12 +181,18 @@ li {
 #setupBox {
     display: grid;
     grid-template-columns: auto auto min-content;
-    border-color: #bdbbbcc9;
+    border-color: #c7c6c67e;
     border-width: 1.8px 1.8px 0 1.8px;
     border-style: solid;
     border-radius: 2px;
-    margin: 2rem 1rem 0 1rem;
+    margin: 0.4rem 1rem 0 1rem;
     padding: 0;
+}
+
+#windowContentQuestions {
+    background-color: #D2D9DF;
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
 
 .box-title {
@@ -177,6 +201,11 @@ li {
     display: inline-block;
     padding: 0 2px;
     margin-left: 1em;
+}
+
+
+.hidden { /* kanske högst upp*/
+    display: none!important;
 }
 
 .material-icons {
