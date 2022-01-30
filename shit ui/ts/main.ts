@@ -1,3 +1,7 @@
+
+let second: number = 0;
+let minute: number = 5;
+
 dragElement(<HTMLElement>document.getElementById('window'));
 
 function dragElement(elemt: HTMLElement) {
@@ -36,3 +40,24 @@ function dragElement(elemt: HTMLElement) {
         document.removeEventListener('mousemove', elementDrag);
     }
 };
+
+let intervalID = setInterval(() => {
+    if (second == 0 && minute > 0) {
+        second = 60;
+        minute -= 1;
+    } else if (second > 0){
+        second -= 1;
+    }
+    if (second < 10) {
+        (<HTMLElement>document.getElementById('next')).textContent = `Wait: ${minute}:0${second}`;
+    } else {
+        (<HTMLElement>document.getElementById('next')).textContent = `Wait: ${minute}:${second}`;
+    }
+    if ((<HTMLElement>document.getElementById('next')).textContent == 'Wait: 0:00') {
+        clearInterval(intervalID);
+        setTimeout(() => {
+            (<HTMLElement>document.getElementById('next')).textContent = 'Next >';
+            (<HTMLElement>document.getElementById('next')).removeAttribute('disabled')
+        }, 1000);
+    }
+}, 1000)
