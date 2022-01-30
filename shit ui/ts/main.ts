@@ -42,16 +42,16 @@ function dragElement(elemt: HTMLElement) {
 };
 
 let intervalID = setInterval(() => {
+    if (second < 10) {
+        (<HTMLElement>document.getElementById('next')).textContent = `Wait ${minute}:0${second}`;
+    } else {
+        (<HTMLElement>document.getElementById('next')).textContent = `Wait ${minute}:${second}`;
+    }
     if (second == 0 && minute > 0) {
-        second = 60;
+        second = 59;
         minute -= 1;
     } else if (second > 0){
         second -= 1;
-    }
-    if (second < 10) {
-        (<HTMLElement>document.getElementById('next')).textContent = `Wait: ${minute}:0${second}`;
-    } else {
-        (<HTMLElement>document.getElementById('next')).textContent = `Wait: ${minute}:${second}`;
     }
     if ((<HTMLElement>document.getElementById('next')).textContent == 'Wait: 0:00') {
         clearInterval(intervalID);
