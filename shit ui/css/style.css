@@ -1,13 +1,186 @@
 * {
     box-sizing: border-box;
+    user-select: none;
 }
 body {
     background:rgb(63, 63, 63)
 }
 
-#window {
-    background-color: red;
-    z-index: 999;
-    width: 800px;
-    height: 500px;
+headerText {
+    padding: 5px;
+    font-size: 1em;
 }
+
+h3 {
+    font-family: Calibri;
+    font-size: 1em;
+    padding: 1rem;
+    margin: 0;
+}
+
+p1 {
+    font-family: Calibri;
+    font-size: 1em;
+    padding: 1rem;
+    margin: 0 0 1em 1em;
+    display: block; 
+}
+
+h1 {
+    font-family: Calibri;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+}
+
+h2 {
+    font-family: Calibri;
+    font-size: 1.1em;
+    padding: 1em 1em 0 1px;
+    margin: 0;
+}
+
+p {
+    font-family: Calibri;
+    font-size: 0.85em;
+    padding: 0.25em 0 0.25em 1px; 
+    margin: 0;
+    word-spacing: 3px;
+}
+
+ul {
+    margin: 4 0 4 0;
+}
+li {
+    font-family: Calibri;
+    font-size: 0.85em;
+}
+
+#window {
+    background-color: #5A5B60;
+    width: 770px;
+    height: 595px;
+    position: absolute;
+    display: grid;
+    grid-template-rows: 5%;
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 2px;
+    border-color: #5A5B60;
+}
+
+#window #windowHeader {
+    background-color: #495359;
+    display: grid;
+    grid-template-columns: auto 12em;
+}
+
+#window #windowHeader #headerText {
+    color: #D2D9DF;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-family: Calibri;
+}
+
+#window #windowHeader #headerButtons {
+    display: flex;
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+#window #windowHeader #headerButtons #minimize {
+    text-align: center;
+    color: #D2D9DF;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#window #windowHeader #headerButtons #maximize {
+    color: #D2D9DF;
+    text-align: center;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#window #windowHeader #headerButtons #exit {
+    color: #D2D9DF;
+    text-align: center;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#window #windowHeader #headerButtons #maximize:hover {
+    background-color: #5D6A72;
+}
+#window #windowHeader #headerButtons #minimize:hover {
+    background-color: #5D6A72;
+}
+
+#window #windowHeader #headerButtons #exit:hover {
+    background-color: #C42B1C;
+}
+
+#window #windowContent {
+    background-color: #D2D9DF;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+#window #windowContent #contentInfo {
+    background-color: #FFFFFF;
+    height: max-content;
+}
+
+#window #windowContent #contentInteractiveBox {
+    background-color: #F0EEF0;
+}
+
+#contentInteractiveBox {
+    display: grid;
+    grid-template-rows: min-content min-content auto ;
+}
+
+#scrollBox {
+    background-color: #FFFFFF;
+    overflow-y: scroll;
+    height: 296px;
+    border-style: inset;
+    border-width: 2.5px;
+    margin: 1rem 1rem 0.2rem 1rem;
+}
+
+#setupBox {
+    display: grid;
+    grid-template-columns: auto auto min-content;
+    border-color: #bdbbbcc9;
+    border-width: 1.8px 1.8px 0 1.8px;
+    border-style: solid;
+    border-radius: 2px;
+    margin: 2rem 1rem 0 1rem;
+    padding: 0;
+}
+
+.box-title {
+    margin-top: -10px;
+    background: #F0EEF0 none repeat scroll 0 0;
+    display: inline-block;
+    padding: 0 2px;
+    margin-left: 1em;
+}
+
+.material-icons {
+    font-size: 16px;
+}
+
+
