@@ -86,6 +86,13 @@ function switchWindow() {
     windowContentQuestions.style.opacity = "1";
 }
 document.getElementById('scrollBoxText').addEventListener('scroll', startCountdown);
+document.getElementById('verifyButton').addEventListener('click', () => {
+    let checkboxes = document.querySelectorAll('input[name="quiz"]');
+    for (let i = 0; i < checkboxes.length; i++) {
+        let checkbox = checkboxes.item(i);
+        console.log(checkbox.id, checkbox.checked);
+    }
+});
 recenterWindow();
 
 },{}]},{},[1]);

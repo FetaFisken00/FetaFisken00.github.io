@@ -17,7 +17,7 @@ function dragElement(elemt: HTMLElement) {
         */
         (<HTMLElement>document.getElementById(elemt.id + "Header")).addEventListener('mousedown', dragMouseDown);
     }
-
+ 
     function dragMouseDown(e: MouseEvent) {
         e.preventDefault()
         pos3 = e.clientX;
@@ -97,6 +97,13 @@ function switchWindow() {
 }
 
 (<HTMLElement>document.getElementById('scrollBoxText')).addEventListener('scroll', startCountdown);
+(<HTMLElement>document.getElementById('verifyButton')).addEventListener('click', () => {
+    let checkboxes = document.querySelectorAll('input[name="quiz"]');
+    for (let i = 0; i < checkboxes.length; i++) {
+        let checkbox = checkboxes.item(i) as HTMLInputElement
+        console.log(checkbox.id, checkbox.checked)
+    }
+})
 
 recenterWindow()
 

@@ -212,4 +212,12 @@ li {
     font-size: 16px;
 }
 
+input[name=quiz] {
+    margin-right: 7px;
+    margin-left: 40px;
+}
 
+label {
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
