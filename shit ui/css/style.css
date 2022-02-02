@@ -33,7 +33,7 @@ h1 {
     margin: 0;
     padding: 0;
     text-align: center;
-
+    user-select: auto;
 }
 
 h2 {
@@ -41,6 +41,7 @@ h2 {
     font-size: 1.1em;
     padding: 1em 1em 0 1px;
     margin: 0;
+    user-select: auto;
 }
 
 p {
@@ -49,14 +50,17 @@ p {
     padding: 0.25em 0 0.25em 1px; 
     margin: 0;
     word-spacing: 3px;
+    user-select: auto;
 }
 
 ul {
     margin: 4 0 4 0;
+    user-select: auto;
 }
 li {
     font-family: Calibri;
     font-size: 0.85em;
+    user-select: auto;
 }
 
 #window {
@@ -234,4 +238,8 @@ button.buttonClass {
     display: grid;
     grid-template-columns: min-content auto;
     align-items: center;
+}
+
+.wrong {
+    color: red;
 }

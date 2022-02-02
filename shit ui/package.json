@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "start": "tsc && browserify js/main.js -o js/bundle.js"
+    "start": "tsc && browserify js/ts/main.js -o js/bundle.js"
   },
   "keywords": [],
   "author": "",
