@@ -20,8 +20,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const data = __importStar(require("../json/quiz.json"));
-let minute = 0, second = 5;
-let quizQuestions = [];
+let minute = 0, second = 10;
+let howLongIsASecondInMS = 1000;
 dragElement(document.getElementById('window'));
 function recenterWindow() {
     document.getElementById('window').style.left = (document.documentElement.clientWidth / 2) - document.getElementById('window').offsetWidth / 2 + "px";
@@ -93,9 +93,9 @@ function startCountdown() {
                     next.textContent = 'Next >';
                     next.removeAttribute('disabled');
                     next.addEventListener('click', switchWindow);
-                }, 100);
+                }, howLongIsASecondInMS);
             }
-        }, 100);
+        }, howLongIsASecondInMS);
     }
 }
 function switchWindow() {
@@ -110,7 +110,7 @@ function switchWindow() {
             windowContentQuestions.classList.add('hidden');
             windowContentQuestions.style.opacity = "0";
             windowContentTerms.classList.remove('hidden');
-            minute = 0, second = 5;
+            minute = 0, second = 10;
             next.textContent = 'Wait';
             next.setAttribute('disabled', '');
             scrollBoxText.scroll(0, 0);
