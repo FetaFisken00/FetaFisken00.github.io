@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     user-select: none;
+    font-family: Calibri;
 }
 body {
     background:rgb(63, 63, 63)
@@ -214,10 +215,23 @@ li {
 
 input[name=quiz] {
     margin-right: 7px;
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 label {
     padding-top: 0.25em;
     padding-bottom: 0.25em;
+    font-size: 0.95em;
+}
+
+button.buttonClass {
+    margin: 5px;
+    width: 5rem;
+    align-items: center;
+}
+
+.quizClass {
+    display: grid;
+    grid-template-columns: min-content auto;
+    align-items: center;
 }

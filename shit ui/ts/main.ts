@@ -1,3 +1,4 @@
+//import * as data from '../json/quiz.json'
 
 let second: number = 5;
 let minute: number = 0;
@@ -106,6 +107,9 @@ function switchWindow() {
 })
 
 recenterWindow()
+switchWindow()
+
+//console.log("JSON?", data)
 
 
 

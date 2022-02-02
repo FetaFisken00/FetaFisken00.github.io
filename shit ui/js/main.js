@@ -1,4 +1,5 @@
 "use strict";
+//import * as data from '../json/quiz.json'
 let second = 5;
 let minute = 0;
 dragElement(document.getElementById('window'));
@@ -93,4 +94,6 @@ document.getElementById('verifyButton').addEventListener('click', () => {
     }
 });
 recenterWindow();
+switchWindow();
+//console.log("JSON?", data)
 //# sourceMappingURL=main.js.map
