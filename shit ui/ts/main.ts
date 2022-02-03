@@ -1,8 +1,9 @@
-import * as data from "../json/quiz copy.json";
+import * as data from "../json/quiz.json";
 
 let minute: number = 0,
     second: number = 10;
 let howLongIsASecondInMS: number = 100;
+let quizArray: any[] = [];
 
 dragElement(<HTMLElement>document.getElementById("window"));
 
@@ -116,7 +117,6 @@ function switchWindow() {
 
     switch ("hidden") {
         case windowContentTerms.className: // i.e switch to Terms
-            console.log("terms");
             windowContentQuestions.classList.add("hidden");
             windowContentQuestions.style.opacity = "0";
 
@@ -138,7 +138,7 @@ function switchWindow() {
             (<HTMLElement>document.getElementById("next")).removeEventListener("click", switchWindow);
             let labels = document.querySelectorAll("label");
 
-            let quizArray: any[] = getQuizQuestions();
+            quizArray = getQuizQuestions();
             console.log(quizArray)
             for (let i = 0; i < labels.length; i++) {
                 let label = labels.item(i) as HTMLLabelElement;
@@ -164,23 +164,24 @@ function switchWindow() {
     }
 }
 
+// TODO: change 'strumpa' to false
 function getQuizQuestions() {
-    let quizArray: any[] = [];
+    let quizArrayTemp: any[] = [];
     data.questions.forEach((question) => {
-        quizArray.push([question.question, question.key]);
+        quizArrayTemp.push([question.question, question.key || 'strumpa']);
     });
-    let currentIndex = quizArray.length,
+    let currentIndex = quizArrayTemp.length,
         randomIndex;
     while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * quizArray.length);
+        randomIndex = Math.floor(Math.random() * quizArrayTemp.length);
         currentIndex--;
 
-        [quizArray[currentIndex], quizArray[randomIndex]] = [
-            quizArray[randomIndex],
-            quizArray[currentIndex],
+        [quizArrayTemp[currentIndex], quizArrayTemp[randomIndex]] = [
+            quizArrayTemp[randomIndex],
+            quizArrayTemp[currentIndex],
         ];
     }
-    return quizArray;
+    return quizArrayTemp;
 }
 
 (<HTMLElement>document.getElementById("scrollBoxText")).addEventListener("scroll", startCountdown);
@@ -189,7 +190,15 @@ function getQuizQuestions() {
     // TODO: Make it so that the all the questions in quiz.json also has a true/false attribute so that the for-loop below can check if the person answered correctly.
     for (let i = 0; i < checkboxes.length; i++) {
         let checkbox = checkboxes.item(i) as HTMLInputElement;
-        //console.log(checkbox.id, checkbox.checked)
+        console.log(i, checkbox.checked, quizArray[i][1])
+        // switch (checkbox.checked) {
+            // case (true):
+                // console.log(i, 'true')
+                // break;
+            // case (false):
+                // console.log(i, 'false')
+                // break;
+        // }
     }
     // TODO: As part of the above TODO change this if statement so its isn't just false
     if (true) {

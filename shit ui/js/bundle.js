@@ -94,9 +94,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const data = __importStar(require("../json/quiz copy.json"));
+const data = __importStar(require("../json/quiz.json"));
 let minute = 0, second = 10;
 let howLongIsASecondInMS = 100;
+let quizArray = [];
 dragElement(document.getElementById("window"));
 function recenterWindow() {
     document.getElementById("window").style.left =
@@ -193,7 +194,6 @@ function switchWindow() {
     let next = document.getElementById("next");
     switch ("hidden") {
         case windowContentTerms.className: // i.e switch to Terms
-            console.log("terms");
             windowContentQuestions.classList.add("hidden");
             windowContentQuestions.style.opacity = "0";
             windowContentTerms.classList.remove("hidden");
@@ -209,7 +209,7 @@ function switchWindow() {
         case windowContentQuestions.className: // i.e switch to questions
             document.getElementById("next").removeEventListener("click", switchWindow);
             let labels = document.querySelectorAll("label");
-            let quizArray = getQuizQuestions();
+            quizArray = getQuizQuestions();
             console.log(quizArray);
             for (let i = 0; i < labels.length; i++) {
                 let label = labels.item(i);
@@ -232,20 +232,20 @@ function switchWindow() {
     }
 }
 function getQuizQuestions() {
-    let quizArray = [];
+    let quizArrayTemp = [];
     data.questions.forEach((question) => {
-        quizArray.push([question.question, question.key]);
+        quizArrayTemp.push([question.question, question.key || 'strumpa']);
     });
-    let currentIndex = quizArray.length, randomIndex;
+    let currentIndex = quizArrayTemp.length, randomIndex;
     while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * quizArray.length);
+        randomIndex = Math.floor(Math.random() * quizArrayTemp.length);
         currentIndex--;
-        [quizArray[currentIndex], quizArray[randomIndex]] = [
-            quizArray[randomIndex],
-            quizArray[currentIndex],
+        [quizArrayTemp[currentIndex], quizArrayTemp[randomIndex]] = [
+            quizArrayTemp[randomIndex],
+            quizArrayTemp[currentIndex],
         ];
     }
-    return quizArray;
+    return quizArrayTemp;
 }
 document.getElementById("scrollBoxText").addEventListener("scroll", startCountdown);
 document.getElementById("verifyButton").addEventListener("click", () => {
@@ -253,7 +253,15 @@ document.getElementById("verifyButton").addEventListener("click", () => {
     // TODO: Make it so that the all the questions in quiz.json also has a true/false attribute so that the for-loop below can check if the person answered correctly.
     for (let i = 0; i < checkboxes.length; i++) {
         let checkbox = checkboxes.item(i);
-        //console.log(checkbox.id, checkbox.checked)
+        console.log(i, checkbox.checked, quizArray[i][1]);
+        // switch (checkbox.checked) {
+        // case (true):
+        // console.log(i, 'true')
+        // break;
+        // case (false):
+        // console.log(i, 'false')
+        // break;
+        // }
     }
     // TODO: As part of the above TODO change this if statement so its isn't just false
     if (true) {
@@ -262,4 +270,4 @@ document.getElementById("verifyButton").addEventListener("click", () => {
 });
 recenterWindow();
 
-},{"../json/quiz copy.json":1}]},{},[2]);
+},{"../json/quiz.json":1}]},{},[2]);
