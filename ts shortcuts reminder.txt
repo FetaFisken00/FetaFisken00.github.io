@@ -1,0 +1,4 @@
+Find shit with with @ or # in command palets, or ctrl shift .
+ctrl-d select all similar
+alt click select multiples carets
+ctrl+' toggle comment block
