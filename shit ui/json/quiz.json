@@ -1,56 +1,12 @@
 {
     "questions": [
         {
-            "question": "true",
+            "question": "true 1",
             "key": true
         },
         {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "true",
-            "key:": true
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
-        },
-        {
-            "question": "false",
-            "key:": false
+            "question": "false 2",
+            "key": false
         }
     ]
 }

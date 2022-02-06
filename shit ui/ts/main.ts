@@ -1,8 +1,8 @@
 import * as data from "../json/quiz.json";
 
-let minute: number = 0,
-    second: number = 10;
-let howLongIsASecondInMS: number = 100;
+let time: number = 150,
+    timeIncrement: number = 150,
+    howLongIsASecondInMS: number = 150;
 let quizArray: any[] = [];
 
 dragElement(<HTMLElement>document.getElementById("window"));
@@ -72,28 +72,45 @@ function dragElement(windowElem: HTMLElement) {
     }
 }
 
+function incrementTimer(): [number, number] {
+    let seconds: number = 0,
+        minutes: number = 0;
+    let timeTemp = time;
+    while (timeTemp >= 60) {
+        timeTemp -= 60;
+        minutes++;
+    }
+    seconds = timeTemp;
+    if (minutes <= 60) {
+        time += timeIncrement;
+    }
+    console.log("within incrementTimer", minutes, seconds);
+    return [seconds, minutes];
+}
+
 function startCountdown() {
     let next = <HTMLElement>document.getElementById("next");
     let scrollBoxText = <HTMLElement>document.getElementById("scrollBoxText");
 
     if (scrollBoxText.scrollTop + 25 > scrollBoxText.scrollHeight - scrollBoxText.clientHeight) {
-        if (second < 10) {
-            next.textContent = `Wait ${minute}:0${second}`;
+        let [seconds, minutes] = incrementTimer();
+        if (seconds < 10) {
+            next.textContent = `Wait ${minutes}:0${seconds}`;
         } else {
-            next.textContent = `Wait ${minute}:${second}`;
+            next.textContent = `Wait ${minutes}:${seconds}`;
         }
         scrollBoxText.removeEventListener("scroll", startCountdown);
         let intervalID = setInterval(() => {
-            if (second == 0 && minute > 0) {
-                second = 59;
-                minute -= 1;
-            } else if (second > 0) {
-                second -= 1;
+            if (seconds == 0 && minutes > 0) {
+                seconds = 59;
+                minutes -= 1;
+            } else if (seconds > 0) {
+                seconds -= 1;
             }
-            if (second < 10) {
-                next.textContent = `Wait ${minute}:0${second}`;
+            if (seconds < 10) {
+                next.textContent = `Wait ${minutes}:0${seconds}`;
             } else {
-                next.textContent = `Wait ${minute}:${second}`;
+                next.textContent = `Wait ${minutes}:${seconds}`;
             }
             if (next.textContent == "Wait 0:00") {
                 clearInterval(intervalID);
@@ -109,11 +126,14 @@ function startCountdown() {
 
 function getQuizQuestions() {
     let quizArrayTemp: any[] = [];
-    data.questions.forEach((question) => {
-        quizArrayTemp.push([question.question, question.key || false]);
+
+    data.questions.forEach((questionData) => {
+        quizArrayTemp.push([questionData.question, questionData.key]);
     });
-    let currentIndex = quizArrayTemp.length,
-        randomIndex;
+
+    let currentIndex: number = quizArrayTemp.length;
+    let randomIndex: number;
+
     while (currentIndex != 0) {
         randomIndex = Math.floor(Math.random() * quizArrayTemp.length);
         currentIndex--;
@@ -137,7 +157,6 @@ function windowSwitchTerms() {
 
     windowContentTerms.classList.remove("hidden");
 
-    (minute = 0), (second = 10);
     next.textContent = "Wait";
     next.setAttribute("disabled", "");
     scrollBoxTerms.scroll(0, 0);
@@ -149,6 +168,10 @@ function windowSwitchTerms() {
     windowContentTerms.style.opacity = "1";
 }
 
+function winEvent() {
+    (<HTMLElement>document.getElementById("window")).style.opacity = "0";
+}
+
 function windowSwitchQuiz() {
     let windowContentTerms = <HTMLElement>document.getElementById("windowContentTerms");
     let windowContentQuestions = <HTMLElement>document.getElementById("windowContentQuestions");
@@ -158,6 +181,10 @@ function windowSwitchQuiz() {
     next.removeEventListener("click", windowSwitchTerms);
 
     quizArray = getQuizQuestions();
+
+    while (scrollBoxQuiz.firstChild) {
+        scrollBoxQuiz.removeChild(scrollBoxQuiz.firstChild);
+    }
 
     for (let i = 0; i < quizArray.length; i++) {
         let parentElement = <HTMLElement>document.getElementById("scrollBoxQuiz");
@@ -195,20 +222,32 @@ function windowSwitchQuiz() {
     scrollBoxQuiz.scroll(0, 0);
 
     windowContentQuestions.style.opacity = "1";
+
+    (<HTMLElement>document.getElementById("verifyButton")).addEventListener("click", verifyInput);
 }
 
-// TODO: make it so that the checkboxes are reset, and finnish it so that it actually works
-(<HTMLElement>document.getElementById("scrollBoxText")).addEventListener("scroll", startCountdown);
-(<HTMLElement>document.getElementById("verifyButton")).addEventListener("click", () => {
+function verifyInput() {
     let checkboxes = document.querySelectorAll('input[name="quiz"]');
-    console.log("checking results");
+    let thing: string = "0";
+
+    console.log(quizArray);
+
     for (let i = 0; i < checkboxes.length; i++) {
         let checkbox = checkboxes.item(i) as HTMLInputElement;
+        console.log(i, checkbox.checked);
         if (checkbox.checked != quizArray[i][1]) {
-            console.log(checkbox.checked, quizArray[i][1]);
+            console.log("CONDITION FULFILLED! i.e you chose the wrong answer", i);
+            thing = "1";
             windowSwitchTerms();
+            break;
         }
     }
-});
+    if (thing == "0") {
+        winEvent();
+    }
+    (<HTMLElement>document.getElementById("verifyButton")).removeEventListener("click", verifyInput);
+}
 
+(<HTMLElement>document.getElementById("scrollBoxText")).addEventListener("scroll", startCountdown);
+(<HTMLElement>document.getElementById("print")).addEventListener("click", () => window.print());
 recenterWindow();
