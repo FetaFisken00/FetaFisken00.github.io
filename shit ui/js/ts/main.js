@@ -104,13 +104,13 @@ function startCountdown() {
                 setTimeout(() => {
                     next.textContent = "Next >";
                     next.removeAttribute("disabled");
-                    next.addEventListener("click", switchWindow);
+                    next.addEventListener("click", windowSwitchQuiz);
                 }, howLongIsASecondInMS);
             }
         }, howLongIsASecondInMS);
     }
 }
-// TODO: Split this function into two function for readability
+// TODO: Split this function into two function for readability, case windowContentTerms.className: // i.e switch to Terms should be moved to wrongAnswer()
 function switchWindow() {
     let windowContentTerms = document.getElementById("windowContentTerms");
     let windowContentQuestions = document.getElementById("windowContentQuestions");
@@ -118,7 +118,8 @@ function switchWindow() {
     let scrollBoxQuiz = document.getElementById("scrollBoxQuiz");
     let next = document.getElementById("next");
     switch ("hidden") {
-        case windowContentTerms.className: // i.e switch to Terms
+        case windowContentTerms.className: // windowSwitchTerms()
+            windowSwitchTerms();
             windowContentQuestions.classList.add("hidden");
             windowContentQuestions.style.opacity = "0";
             windowContentTerms.classList.remove("hidden");
@@ -131,11 +132,10 @@ function switchWindow() {
             scrollBoxText.addEventListener("scroll", startCountdown);
             windowContentTerms.style.opacity = "1";
             break;
-        case windowContentQuestions.className: // i.e switch to questions
+        case windowContentQuestions.className: // windowSwitchQuiz()
             document.getElementById("next").removeEventListener("click", switchWindow);
             let labels = document.querySelectorAll("label");
             quizArray = getQuizQuestions();
-            console.log(quizArray);
             for (let i = 0; i < labels.length; i++) {
                 let label = labels.item(i);
                 try {
@@ -159,7 +159,7 @@ function switchWindow() {
 function getQuizQuestions() {
     let quizArrayTemp = [];
     data.questions.forEach((question) => {
-        quizArrayTemp.push([question.question, question.key || 'strumpa']);
+        quizArrayTemp.push([question.question, question.key || false]);
     });
     let currentIndex = quizArrayTemp.length, randomIndex;
     while (currentIndex != 0) {
@@ -172,25 +172,71 @@ function getQuizQuestions() {
     }
     return quizArrayTemp;
 }
+function windowSwitchTerms() {
+    let windowContentTerms = document.getElementById("windowContentTerms");
+    let windowContentQuestions = document.getElementById("windowContentQuestions");
+    let scrollBoxTerms = document.getElementById("scrollBoxText");
+    let next = document.getElementById("next");
+    windowContentQuestions.classList.add("hidden");
+    windowContentQuestions.style.opacity = "0";
+    windowContentTerms.classList.remove("hidden");
+    (minute = 0), (second = 10);
+    next.textContent = "Wait";
+    next.setAttribute("disabled", "");
+    scrollBoxTerms.scroll(0, 0);
+    document.getElementsByClassName("wrong").item(0).style.opacity = "1";
+    next.addEventListener("click", windowSwitchTerms);
+    scrollBoxTerms.addEventListener("scroll", startCountdown);
+    windowContentTerms.style.opacity = "1";
+}
+function windowSwitchQuiz() {
+    let windowContentTerms = document.getElementById("windowContentTerms");
+    let windowContentQuestions = document.getElementById("windowContentQuestions");
+    let scrollBoxQuiz = document.getElementById("scrollBoxQuiz");
+    let next = document.getElementById("next");
+    next.removeEventListener("click", windowSwitchTerms);
+    quizArray = getQuizQuestions();
+    for (let i = 0; i < quizArray.length; i++) {
+        let parentElement = document.getElementById('scrollBoxQuiz');
+        let mainElement = document.createElement('div');
+        let inputElement = document.createElement('input');
+        let labelElement = document.createElement('label');
+        if (i == 0) {
+            mainElement.style.display = "grid";
+            mainElement.style.gridTemplateColumns = "min-content auto";
+            mainElement.style.alignItems = "center";
+            mainElement.style.marginTop = "18px";
+        }
+        if (i > 0) {
+            mainElement.classList.add('quizClass');
+        }
+        inputElement.setAttribute('type', 'checkbox');
+        inputElement.setAttribute('name', 'quiz');
+        inputElement.setAttribute('id', 'question' + i.toString());
+        labelElement.setAttribute('for', 'question' + i.toString());
+        labelElement.textContent = quizArray[i][0];
+        mainElement.appendChild(inputElement);
+        mainElement.appendChild(labelElement);
+        parentElement.appendChild(mainElement);
+        console.log(mainElement);
+    }
+    windowContentTerms.classList.add("hidden");
+    windowContentTerms.style.opacity = "0";
+    windowContentQuestions.classList.remove("hidden");
+    scrollBoxQuiz.scroll(0, 0);
+    windowContentQuestions.style.opacity = "1";
+}
+// TODO: make it so that the checkboxes are reset, and finnish it so that it actually works
 document.getElementById("scrollBoxText").addEventListener("scroll", startCountdown);
 document.getElementById("verifyButton").addEventListener("click", () => {
     let checkboxes = document.querySelectorAll('input[name="quiz"]');
-    // TODO: Make it so that the all the questions in quiz.json also has a true/false attribute so that the for-loop below can check if the person answered correctly.
+    console.log('checking results');
     for (let i = 0; i < checkboxes.length; i++) {
         let checkbox = checkboxes.item(i);
-        console.log(i, checkbox.checked, quizArray[i][1]);
-        // switch (checkbox.checked) {
-        // case (true):
-        // console.log(i, 'true')
-        // break;
-        // case (false):
-        // console.log(i, 'false')
-        // break;
-        // }
-    }
-    // TODO: As part of the above TODO change this if statement so its isn't just false
-    if (true) {
-        switchWindow();
+        if (checkbox.checked != quizArray[i][1]) {
+            console.log(checkbox.checked, quizArray[i][1]);
+            windowSwitchTerms();
+        }
     }
 });
 recenterWindow();

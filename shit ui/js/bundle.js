@@ -2,71 +2,55 @@
 module.exports={
     "questions": [
         {
-            "question": "We constantly review or systems and data to ensure the best possible service to our customers.",
+            "question": "true",
             "key": true
         },
         {
-            "question": "Wipers are a part of cars, on the windshield.",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "We will investigate any such actions that break the terms and conditions with a view to prosecuting and/or taking civil proceedings to recover damages against those responsible.",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process  of our assistance to the Client in the most appropriate manner, whereby  formal meetings of a fixed duration, or any other means, for the express purpose of meeting the Client's needs in respect of provision of the  Company's stated services/products.",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "We will not sell, share, or rent your personal information to any third party or use your e-mail address for unsolicited mail.",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "We are registered under the Data Protection Act 1998 and as such, any information concerning the Client and their respective Client records may be passed to third parties.",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "Both the Client and ourselves have the right to eliminate any services Agreement for any reason. including the  ending of services that are already underway",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "The information on this web site is provided on an 'as is' basis",
+            "question": "true",
+            "key:": true
+        },
+        {
+            "question": "false",
             "key:": false
         },
         {
-            "question": "We do not monitor or view the content of other party's websites which are linked from this website",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "Cash or Personal Cheque with Bankers Card, all major Credit/Debit Cards. Bankers Draft or BACH Transfer are all acceptable methods of payment",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "returned cheques will incur a 25€ charge to cover banking fees and administrative costs. In an instance of a second return cheque, we reserve the right to terminate the agreement and, if agreed to, we shall insist on future cash transactions only",
+            "question": "false",
             "key:": false
         },
         {
-            "question": "Copyright and other irrelevant intellectual property rights exists on all text relating the Company's services and the full context of this website",
-            "key:": false
-        },
-        {
-            "question": "Neither party shall be liable to the other for any failure to preform any obligation under any Agreement which is du to an event beyond control of such party including but not limited to any Act of god, terrorism, car, Political insurgence, insurrection, riot , either party's bed time, civil unrest, civil war, act of civil or military authority uprising, earthquake, flood, your mom or any other natural or man made eventually outside oru controls, which causes the termination of an agreement or contract entered into, nor which could have been reasonable forseen, excluding climate change but not limited to climate change.",
-            "key:": false
-        },
-        {
-            "question": "The laws of Kingdom of Sweden govern these terms and conditions. By accessing this website you consent to these terms and conditions and to the exclusive jurisdiction of the Swedish courts in all disputes arising out of such access. If any of these terms are deemed invalid or unforeseeable for any reason (including but not limited to the exclusions)",
-            "key:": false
-        },
-        {
-            "question": "The company reserves the right to change these conditions from time to time as it sees fit and your continued use of the site will signify your acceptance of any adjustments to these terms",
-            "key:": false
-        },
-        {
-            "question": "If there are any changes to our privacy policy, we will announce that these changes have been made on our home page and on other key pages on our site. If there are any changes in how we use our site customers' Personally identifiable information, notification by e-mail or postal mail will be made to those affected by this change.",
-            "key:": false
-        },
-        {
-            "question": "Agencies and/or through the Small Claims Court in the event that the outstanding balance does not exceeded 3000€. In such circumstances, you shall be liable for any and all additional administrative and/or court costs.",
+            "question": "false",
             "key:": false
         }
     ]
@@ -179,13 +163,13 @@ function startCountdown() {
                 setTimeout(() => {
                     next.textContent = "Next >";
                     next.removeAttribute("disabled");
-                    next.addEventListener("click", switchWindow);
+                    next.addEventListener("click", windowSwitchQuiz);
                 }, howLongIsASecondInMS);
             }
         }, howLongIsASecondInMS);
     }
 }
-// TODO: Split this function into two function for readability
+// TODO: Split this function into two function for readability, case windowContentTerms.className: // i.e switch to Terms should be moved to wrongAnswer()
 function switchWindow() {
     let windowContentTerms = document.getElementById("windowContentTerms");
     let windowContentQuestions = document.getElementById("windowContentQuestions");
@@ -193,7 +177,8 @@ function switchWindow() {
     let scrollBoxQuiz = document.getElementById("scrollBoxQuiz");
     let next = document.getElementById("next");
     switch ("hidden") {
-        case windowContentTerms.className: // i.e switch to Terms
+        case windowContentTerms.className: // windowSwitchTerms()
+            windowSwitchTerms();
             windowContentQuestions.classList.add("hidden");
             windowContentQuestions.style.opacity = "0";
             windowContentTerms.classList.remove("hidden");
@@ -206,11 +191,10 @@ function switchWindow() {
             scrollBoxText.addEventListener("scroll", startCountdown);
             windowContentTerms.style.opacity = "1";
             break;
-        case windowContentQuestions.className: // i.e switch to questions
+        case windowContentQuestions.className: // windowSwitchQuiz()
             document.getElementById("next").removeEventListener("click", switchWindow);
             let labels = document.querySelectorAll("label");
             quizArray = getQuizQuestions();
-            console.log(quizArray);
             for (let i = 0; i < labels.length; i++) {
                 let label = labels.item(i);
                 try {
@@ -234,7 +218,7 @@ function switchWindow() {
 function getQuizQuestions() {
     let quizArrayTemp = [];
     data.questions.forEach((question) => {
-        quizArrayTemp.push([question.question, question.key || 'strumpa']);
+        quizArrayTemp.push([question.question, question.key || false]);
     });
     let currentIndex = quizArrayTemp.length, randomIndex;
     while (currentIndex != 0) {
@@ -247,25 +231,71 @@ function getQuizQuestions() {
     }
     return quizArrayTemp;
 }
+function windowSwitchTerms() {
+    let windowContentTerms = document.getElementById("windowContentTerms");
+    let windowContentQuestions = document.getElementById("windowContentQuestions");
+    let scrollBoxTerms = document.getElementById("scrollBoxText");
+    let next = document.getElementById("next");
+    windowContentQuestions.classList.add("hidden");
+    windowContentQuestions.style.opacity = "0";
+    windowContentTerms.classList.remove("hidden");
+    (minute = 0), (second = 10);
+    next.textContent = "Wait";
+    next.setAttribute("disabled", "");
+    scrollBoxTerms.scroll(0, 0);
+    document.getElementsByClassName("wrong").item(0).style.opacity = "1";
+    next.addEventListener("click", windowSwitchTerms);
+    scrollBoxTerms.addEventListener("scroll", startCountdown);
+    windowContentTerms.style.opacity = "1";
+}
+function windowSwitchQuiz() {
+    let windowContentTerms = document.getElementById("windowContentTerms");
+    let windowContentQuestions = document.getElementById("windowContentQuestions");
+    let scrollBoxQuiz = document.getElementById("scrollBoxQuiz");
+    let next = document.getElementById("next");
+    next.removeEventListener("click", windowSwitchTerms);
+    quizArray = getQuizQuestions();
+    for (let i = 0; i < quizArray.length; i++) {
+        let parentElement = document.getElementById('scrollBoxQuiz');
+        let mainElement = document.createElement('div');
+        let inputElement = document.createElement('input');
+        let labelElement = document.createElement('label');
+        if (i == 0) {
+            mainElement.style.display = "grid";
+            mainElement.style.gridTemplateColumns = "min-content auto";
+            mainElement.style.alignItems = "center";
+            mainElement.style.marginTop = "18px";
+        }
+        if (i > 0) {
+            mainElement.classList.add('quizClass');
+        }
+        inputElement.setAttribute('type', 'checkbox');
+        inputElement.setAttribute('name', 'quiz');
+        inputElement.setAttribute('id', 'question' + i.toString());
+        labelElement.setAttribute('for', 'question' + i.toString());
+        labelElement.textContent = quizArray[i][0];
+        mainElement.appendChild(inputElement);
+        mainElement.appendChild(labelElement);
+        parentElement.appendChild(mainElement);
+        console.log(mainElement);
+    }
+    windowContentTerms.classList.add("hidden");
+    windowContentTerms.style.opacity = "0";
+    windowContentQuestions.classList.remove("hidden");
+    scrollBoxQuiz.scroll(0, 0);
+    windowContentQuestions.style.opacity = "1";
+}
+// TODO: make it so that the checkboxes are reset, and finnish it so that it actually works
 document.getElementById("scrollBoxText").addEventListener("scroll", startCountdown);
 document.getElementById("verifyButton").addEventListener("click", () => {
     let checkboxes = document.querySelectorAll('input[name="quiz"]');
-    // TODO: Make it so that the all the questions in quiz.json also has a true/false attribute so that the for-loop below can check if the person answered correctly.
+    console.log('checking results');
     for (let i = 0; i < checkboxes.length; i++) {
         let checkbox = checkboxes.item(i);
-        console.log(i, checkbox.checked, quizArray[i][1]);
-        // switch (checkbox.checked) {
-        // case (true):
-        // console.log(i, 'true')
-        // break;
-        // case (false):
-        // console.log(i, 'false')
-        // break;
-        // }
-    }
-    // TODO: As part of the above TODO change this if statement so its isn't just false
-    if (true) {
-        switchWindow();
+        if (checkbox.checked != quizArray[i][1]) {
+            console.log(checkbox.checked, quizArray[i][1]);
+            windowSwitchTerms();
+        }
     }
 });
 recenterWindow();
