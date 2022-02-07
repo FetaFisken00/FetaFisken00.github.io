@@ -1,24 +1,26 @@
 {
-  "name": "typescript---map-shit",
+  "name": "template",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && browserify src/main.js -o dist/bundle.js",
-    "tsc": "tsc"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/mapbox-gl": "^2.6.0",
-    "@types/xml2js": "^0.4.9",
-    "fast-xml-parser": "^4.0.1",
+    "@types/mapbox-gl": "^2.6.1",
+    "browserify": "^17.0.0",
+    "fancy-log": "^2.0.0",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "tsify": "^5.0.4",
     "typescript": "^4.5.5",
-    "xml2js": "^0.4.23"
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^4.0.0"
   },
   "dependencies": {
-    "mapbox-gl": "^2.6.1"
+    "mapbox-gl": "^2.7.0"
   }
 }
