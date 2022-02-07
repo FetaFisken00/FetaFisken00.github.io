@@ -4,8 +4,32 @@ let time: number = 150,
     timeIncrement: number = 150,
     howLongIsASecondInMS: number = 1000;
 let quizArray: any[] = [];
+let intervalID: number
+let skipKey: string = '';
 
 dragElement(<HTMLElement>document.getElementById("window"));
+window.addEventListener("resize", fitWindowToScreen);
+document.getElementById("exit")?.addEventListener("click", fitWindowToScreen);
+document.addEventListener("keypress", skipTimer)
+
+function skipTimer(e: KeyboardEvent) {
+    let next = <HTMLElement>document.getElementById("next");
+    console.log("test".charAt(0))
+    if ("idiot".charAt(skipKey.length) != e.key.toLowerCase()) {
+        skipKey = '';
+        return
+    }
+    skipKey += e.key.toLowerCase()
+    console.log(skipKey)
+    if (skipKey == "idiot") {
+        console.log('SKIPÅ!!!!')
+        skipKey = ''
+        clearInterval(intervalID);
+        next.textContent = "Next >";
+        next.removeAttribute("disabled");
+        next.addEventListener("click", windowSwitchQuiz);
+    }
+}
 
 function recenterWindow() {
     (<HTMLElement>document.getElementById("window")).style.left =
@@ -23,12 +47,7 @@ function dragElement(windowElem: HTMLElement) {
         pos2 = 0,
         pos3 = 0,
         pos4 = 0;
-    if (document.getElementById(windowElem.id + "Header")) {
-        /* 
-        if present, the header is where you move the DIV from:
-        */
-        (<HTMLElement>document.getElementById(windowElem.id + "Header")).addEventListener("mousedown", dragMouseDown);
-    }
+    (<HTMLElement>document.getElementById(windowElem.id + "Header")).addEventListener("mousedown", dragMouseDown);
 
     function dragMouseDown(e: MouseEvent) {
         e.preventDefault();
@@ -39,36 +58,68 @@ function dragElement(windowElem: HTMLElement) {
     }
 
     function elementDrag(e: MouseEvent) {
+       
         e.preventDefault();
         pos1 = pos3 - e.clientX;
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
+        
+        (<HTMLElement>document.getElementById(windowElem.id + "Header")).onmouseup = function() {
+            fitWindowToScreen()
+            return
+        };
 
-        if (
-            windowElem.offsetTop - pos2 > 0 &&
-            windowElem.offsetHeight + windowElem.offsetTop - pos2 < document.documentElement.clientHeight
-        ) {
-            windowElem.style.top = windowElem.offsetTop - pos2 + "px";
+        // If cursor is within the window, X-axis
+        if (e.clientX < -1 || e.clientX > document.documentElement.clientWidth + 1) {
+            console.log(document.documentElement.clientWidth)
+            fitWindowToScreen()
+            return
         }
-        if (
-            windowElem.offsetLeft - pos1 > 0 &&
-            windowElem.offsetLeft + windowElem.offsetWidth - pos1 < document.documentElement.clientWidth
-        ) {
-            windowElem.style.left = windowElem.offsetLeft - pos1 + "px";
+
+        // If cursor is within window, Y-axis
+        if (e.clientY < 0 || e.clientY > document.documentElement.clientHeight + 1) {
+            fitWindowToScreen()
+            return
         }
-        if (
-            windowElem.offsetHeight + windowElem.offsetTop - pos2 > document.documentElement.clientHeight + 100 ||
-            windowElem.offsetLeft + windowElem.offsetWidth - pos1 > document.documentElement.clientWidth + 100
-        ) {
-            windowElem.style.left = 0 + "px";
-            windowElem.style.top = 0 + "px";
-        }
+
+
+        // Move y-axis and x-axis
+        windowElem.style.top = windowElem.offsetTop - pos2 + "px";
+        windowElem.style.left = windowElem.offsetLeft - pos1 + "px";
     }
 
     function closeDragElement() {
         document.removeEventListener("mouseup", closeDragElement);
         document.removeEventListener("mousemove", elementDrag);
+    }
+}
+
+function fitWindowToScreen() {
+    let windowElem = <HTMLElement>document.getElementById("window");
+
+    // If its outside the window to the top
+    if (1 > windowElem.offsetTop) {
+        // console.log("1px")
+        windowElem.style.top = "1px";
+    }
+
+    // If its outside the window to the right
+    if (1 > document.documentElement.clientWidth - (windowElem.offsetLeft + windowElem.offsetWidth)) {
+        // console.log(document.documentElement.clientWidth - windowElem.offsetWidth - 1 + "px")
+        windowElem.style.left = document.documentElement.clientWidth - windowElem.offsetWidth - 1 + "px";
+    }
+
+    // If its outside the window to the bottom
+    if (1 > document.documentElement.clientHeight - (windowElem.offsetTop + windowElem.offsetHeight)) {
+        // console.log(document.documentElement.clientHeight - windowElem.offsetHeight - 1 + "px")
+        windowElem.style.top = document.documentElement.clientHeight - windowElem.offsetHeight - 1 + "px";
+    }
+
+    // If its outside the window to the left
+    if (1 > windowElem.offsetLeft) {
+        // console.log("1px")
+        windowElem.style.left = "1px";
     }
 }
 
@@ -100,7 +151,7 @@ function startCountdown() {
             next.textContent = `Wait ${minutes}:${seconds}`;
         }
         scrollBoxText.removeEventListener("scroll", startCountdown);
-        let intervalID = setInterval(() => {
+        intervalID = setInterval(() => {
             if (seconds == 0 && minutes > 0) {
                 seconds = 59;
                 minutes -= 1;
@@ -131,8 +182,7 @@ function getQuizQuestions() {
         quizArrayTemp.push([questionData.question, questionData.key]);
     });
 
-    let currentIndex: number = quizArrayTemp.length;
-    let randomIndex: number;
+    let currentIndex: number = quizArrayTemp.length, randomIndex: number;
 
     while (currentIndex != 0) {
         randomIndex = Math.floor(Math.random() * quizArrayTemp.length);
@@ -175,6 +225,7 @@ function winEvent() {
 function windowSwitchQuiz() {
     let windowContentTerms = <HTMLElement>document.getElementById("windowContentTerms");
     let windowContentQuestions = <HTMLElement>document.getElementById("windowContentQuestions");
+    let verifyButton = <HTMLElement>document.getElementById("verifyButton")
     let scrollBoxQuiz = <HTMLElement>document.getElementById("scrollBoxQuiz");
     let next = <HTMLElement>document.getElementById("next");
 
@@ -223,29 +274,24 @@ function windowSwitchQuiz() {
 
     windowContentQuestions.style.opacity = "1";
 
-    (<HTMLElement>document.getElementById("verifyButton")).addEventListener("click", verifyInput);
+    verifyButton.addEventListener("click", verifyInput);
 }
 
 function verifyInput() {
     let checkboxes = document.querySelectorAll('input[name="quiz"]');
-    let thing: string = "0";
-
-    console.log(quizArray);
-
+    let verifyButton = <HTMLElement>document.getElementById("verifyButton")
     for (let i = 0; i < checkboxes.length; i++) {
         let checkbox = checkboxes.item(i) as HTMLInputElement;
-        console.log(i, checkbox.checked);
+        console.log(checkbox.checked, quizArray[i][1])
         if (checkbox.checked != quizArray[i][1]) {
-            console.log("CONDITION FULFILLED! i.e you chose the wrong answer", i);
-            thing = "1";
             windowSwitchTerms();
-            break;
+            return;
+        }
+        if (i == checkboxes.length - 1) {
+            winEvent()
         }
     }
-    if (thing == "0") {
-        winEvent();
-    }
-    (<HTMLElement>document.getElementById("verifyButton")).removeEventListener("click", verifyInput);
+    verifyButton.removeEventListener("click", verifyInput);
 }
 
 (<HTMLElement>document.getElementById("scrollBoxText")).addEventListener("scroll", startCountdown);

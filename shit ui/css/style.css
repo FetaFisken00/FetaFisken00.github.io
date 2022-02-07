@@ -4,7 +4,8 @@
     font-family: Calibri;
 }
 body {
-    background:rgb(63, 63, 63)
+    background:rgb(63, 63, 63);
+    overflow: hidden;
 }
 
 headerText {

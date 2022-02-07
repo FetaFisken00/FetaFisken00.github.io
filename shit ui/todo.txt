@@ -1,7 +1,7 @@
 make it so that you cant drag the window on header buttons
 
-make it move into view on resize
-
-add easer eggs into text
+add easter eggs into text
 
 fiddle with button appearance and checkbox appearance
+
+make it so the skip word changes from try to try
