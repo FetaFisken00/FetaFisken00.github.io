@@ -1,3 +1,73 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+module.exports={
+    "questions": [
+        {
+            "question": "We constantly review or systems and data to ensure the best possible service to our customers.",
+            "key": false
+        },
+        {
+            "question": "We will not sell, share, or rent your personal information to any third party or use your e-mail address for unsolicited mail",
+            "key": false
+        },
+        {
+            "question": "The information on this web site is provided on an 'as is' basis",
+            "key": true
+        },
+        {
+            "question": "We do not monitor or review the content of other party's browsing habits which are linked from this application",
+            "key": false
+        },
+        {
+            "question": "Copyright and other relevant intellectual property rights exists on all text relating the Company's services and the full context of this application",
+            "key": true
+        },
+        {
+            "question": "The company reserves the right to change these conditions from time to time as it sees fit and your continued use of the site will signify your acceptance of any adjustments to these terms",
+            "key": true
+        },
+        {
+            "question":"We recognize Chinese Taipei as a separate nation",
+            "key": false
+        },
+        {
+            "question": "Agencies and/or through the Small Claims Court in the event that the outstanding balance does not exceeded 3000€. In such circumstances, you shall be liable for any and all additional administrative and/or court costs",
+            "key": false
+        },
+        {
+            "question": "This application logs the following but not limited to the following; stores banking information, key-logs, webcam feed if available, biometric data, pornographic preferences, location data and ip-address.",
+            "key": true
+        },
+        {
+            "question": "We at [company name] values our customers privacy and is of our outmost importance",
+            "key": false
+        },
+        {
+            "question": "publicly performing and/or showing software content and using the application after bed time are two disallowed use cases of the application in question",
+            "key": false
+        },
+        {
+            "question": "Humans under the age of 13, more known by the name 'those things' can use the application",
+            "key": false
+        },
+        {
+            "question": "Do 'those things' have the same rights as people over the age of 18",
+            "key": false
+        },
+        {
+            "question": "All the user information we collect are sent to Tchyna for free because of our generous sponsors that in no way have anything to to with the Peoples republic of china",
+            "key": false
+        },
+        {
+            "question":"Installing the application is the same as accepting the ToU",
+            "key": true
+        },
+        {
+            "question":"God is an important part of our values",
+            "key": true
+        }
+    ]
+}
+},{}],2:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20,7 +90,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const data = __importStar(require("../json/quiz.json"));
-let time = 150, timeIncrement = 150, howLongIsASecondInMS = 150;
+let time = 150, timeIncrement = 150, howLongIsASecondInMS = 1000;
 let quizArray = [];
 dragElement(document.getElementById("window"));
 function recenterWindow() {
@@ -222,4 +292,5 @@ function verifyInput() {
 document.getElementById("scrollBoxText").addEventListener("scroll", startCountdown);
 document.getElementById("print").addEventListener("click", () => window.print());
 recenterWindow();
-//# sourceMappingURL=main.js.map
+
+},{"../json/quiz.json":1}]},{},[2]);

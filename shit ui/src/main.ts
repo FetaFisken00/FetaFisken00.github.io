@@ -2,7 +2,7 @@ import * as data from "../json/quiz.json";
 
 let time: number = 150,
     timeIncrement: number = 150,
-    howLongIsASecondInMS: number = 150;
+    howLongIsASecondInMS: number = 1000;
 let quizArray: any[] = [];
 
 dragElement(<HTMLElement>document.getElementById("window"));

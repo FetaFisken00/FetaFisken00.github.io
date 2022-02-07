@@ -1,12 +1,68 @@
 {
     "questions": [
         {
-            "question": "true 1",
+            "question": "We constantly review or systems and data to ensure the best possible service to our customers.",
+            "key": false
+        },
+        {
+            "question": "We will not sell, share, or rent your personal information to any third party or use your e-mail address for unsolicited mail",
+            "key": false
+        },
+        {
+            "question": "The information on this web site is provided on an 'as is' basis",
             "key": true
         },
         {
-            "question": "false 2",
+            "question": "We do not monitor or review the content of other party's browsing habits which are linked from this application",
             "key": false
+        },
+        {
+            "question": "Copyright and other relevant intellectual property rights exists on all text relating the Company's services and the full context of this application",
+            "key": true
+        },
+        {
+            "question": "The company reserves the right to change these conditions from time to time as it sees fit and your continued use of the site will signify your acceptance of any adjustments to these terms",
+            "key": true
+        },
+        {
+            "question":"We recognize Chinese Taipei as a separate nation",
+            "key": false
+        },
+        {
+            "question": "Agencies and/or through the Small Claims Court in the event that the outstanding balance does not exceeded 3000€. In such circumstances, you shall be liable for any and all additional administrative and/or court costs",
+            "key": false
+        },
+        {
+            "question": "This application logs the following but not limited to the following; stores banking information, key-logs, webcam feed if available, biometric data, pornographic preferences, location data and ip-address.",
+            "key": true
+        },
+        {
+            "question": "We at [company name] values our customers privacy and is of our outmost importance",
+            "key": false
+        },
+        {
+            "question": "publicly performing and/or showing software content and using the application after bed time are two disallowed use cases of the application in question",
+            "key": false
+        },
+        {
+            "question": "Humans under the age of 13, more known by the name 'those things' can use the application",
+            "key": false
+        },
+        {
+            "question": "Do 'those things' have the same rights as people over the age of 18",
+            "key": false
+        },
+        {
+            "question": "All the user information we collect are sent to Tchyna for free because of our generous sponsors that in no way have anything to to with the Peoples republic of china",
+            "key": false
+        },
+        {
+            "question":"Installing the application is the same as accepting the ToU",
+            "key": true
+        },
+        {
+            "question":"God is an important part of our values",
+            "key": true
         }
     ]
 }

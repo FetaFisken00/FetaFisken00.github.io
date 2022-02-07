@@ -1,18 +1,3 @@
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-module.exports={
-    "questions": [
-        {
-            "question": "true 1",
-            "key": true
-        },
-        {
-            "question": "false 2",
-            "key": false
-        }
-    ]
-}
-
-},{}],2:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -35,7 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const data = __importStar(require("../json/quiz.json"));
-let time = 150, timeIncrement = 150, howLongIsASecondInMS = 150;
+let time = 150, timeIncrement = 150, howLongIsASecondInMS = 1000;
 let quizArray = [];
 dragElement(document.getElementById("window"));
 function recenterWindow() {
@@ -237,5 +222,4 @@ function verifyInput() {
 document.getElementById("scrollBoxText").addEventListener("scroll", startCountdown);
 document.getElementById("print").addEventListener("click", () => window.print());
 recenterWindow();
-
-},{"../json/quiz.json":1}]},{},[2]);
+//# sourceMappingURL=main.js.map
