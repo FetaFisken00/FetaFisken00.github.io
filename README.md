@@ -5,11 +5,11 @@
 ##  Finnished projects
 
 ##  Almost finnished projects
-* [Shit-ui](https://fetafisken00.github.io/shit%20ui/html/index.html)
+* [Shit-ui](https://fetafisken00.github.io/Installer-ToU/html/index)
 
 ##  WIP
-* [Buttonmash](https://fetafisken00.github.io/buttonmash/dist/index.html)
-* [Heatmap](https://fetafisken00.github.io/heatmap/dist/index.html)
+* [Buttonmash](https://fetafisken00.github.io/buttonmash/dist/index)
+* [Heatmap](https://fetafisken00.github.io/heatmap/dist/index)
 
 ## TODO
 
@@ -21,3 +21,4 @@
 *   Learn how to do a simple heroku app/site(?)`
 *   Wordle solver
 *   Snake solver
+*   [Typewriter](https://www.reddit.com/r/badUIbattles/comments/piq746/unreliable_typewriter/)
