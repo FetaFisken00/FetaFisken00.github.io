@@ -42,6 +42,7 @@ for tcx_file in tcx_files:
                 counter += 1
                 dataJSON = {
                     "type": "Feature",
+                    "PROPERTIES": {"dbh": 6},
                     "geometry": {
                         "type": "Point",
                         "coordinates": [
